@@ -1,10 +1,12 @@
+require('dotenv').config()
+
 const pg = require('pg');
 const pool = new pg.Pool({
-  user: 'sebavidal',
-  password: '',
-  host: 'localhost',
-  port: 5432,
-  database: 'banco',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
 });
 
 async function registerUser(user_data) {
@@ -25,8 +27,7 @@ async function loginUser(user_data) {
     values: Object.values(user_data),
   };
   try {
-    const resp = await pool.query(sql);
-    return resp;
+    return pool.query(sql);
   } catch (error) {
     console.log(error.message);
   }
