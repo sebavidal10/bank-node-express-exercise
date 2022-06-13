@@ -98,10 +98,17 @@ app.get('/dashboard', async (req, res) => {
   let users = await getAllUsers();
   let saldo = 0;
   const transfers = await getAllTransfers();
+  console.log(token);
   if (token) {
     jwt.verify(token, secret, (err, decoded) => {
-      saldo = users.find((user) => user.id == decoded.id).balance;
-      users = users.filter((user) => user.id != decoded.id);
+      try {
+        saldo = users.find((user) => user.id == decoded.id).balance;
+        users = users.filter((user) => user.id != decoded.id);
+      } catch (error) {
+        res.clearCookie('token');
+        res.redirect('/');
+      }
+
       if (err) {
         res.redirect('/');
       } else {
