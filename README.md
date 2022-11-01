@@ -1,4 +1,4 @@
-# adl-bank-node-express-exercise
+# Bank, node-express exercise
 
 ## Desafío
 
@@ -22,7 +22,3 @@ Docker compose nos hace todo mas facil, se crean los contenedores y se vinculan,
 
 `docker-compose up`  
 `docker-compose down`
-
-# ToDo
-
-Con el tiempo agregare mejoras
